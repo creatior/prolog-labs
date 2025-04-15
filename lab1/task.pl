@@ -6,12 +6,15 @@ man(mefodiy).
 woman(vladina).
 woman(galya).
 woman(sveta).
+woman(valentina).
 woman(zoya).
 woman(katrin).
 child(dimitriy, anatoliy).
 child(dimitriy, galya).
 child(vladina, anatoliy).
 child(vladina, galya).
+child(valentina, anatoliy).
+child(valentina, galya).
 child(kirill, dimitriy).
 child(mefodiy, dimitriy).
 child(kirill, sveta).
@@ -78,3 +81,23 @@ wife(X, Y) :-
 
 wife(X) :-
 	wife(Y, X), print(Y).
+
+grand_da(X, Y) :-
+	woman(X),
+	child(X, P),
+	child(P, Y).
+
+grand_dats(X) :-
+	grand_da(Y, X), print(Y), nl, fail.
+
+grand_pa_and_da(X, Y) :-
+	grand_da(X, Y);
+	grand_da(Y, X).
+
+aunt(X, Y) :-
+	woman(X),
+	child(Y, P),
+	sister(X, P).
+
+aunt(X) :-
+	setof(Y, aunt(Y, X), Aunts), print(Aunts).
