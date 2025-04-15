@@ -62,3 +62,19 @@ b_s(X, Y) :-
 
 b_s(X) :-
 	setof(Y, b_s(Y, X), Siblings), print(Siblings).
+	
+father(X, Y) :-
+	man(X),
+	child(Y, X).
+
+father(X) :-
+	father(Y, X), print(Y).
+
+wife(X, Y) :-
+	woman(X),
+	child(P, X),
+	child(P, Y),
+	X \= Y.
+
+wife(X) :-
+	wife(Y, X), print(Y).
